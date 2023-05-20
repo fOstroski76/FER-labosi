@@ -1,0 +1,45 @@
+.images-container{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    
+    
+}
+
+.images-figure{
+  display: grid;
+  align-items: center;
+  text-align: center;
+  color: #ab4f8b;
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/DancingScript-Medium.woff2") format("woff2"), url("../fonts/DancingScript-Medium.woff") format("woff");
+  font-size: larger;
+  font-family: 'Dancing Script', cursive;
+  object-fit: contain;
+  margin: 0%;
+}
+.images-div{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    object-fit: contain;
+    
+}
+.offer-image{
+    display: block;
+    height: 200px;
+    width: 200px;
+    
+
+}
+.images-figcaption{
+  align-items: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: larger;
+  text-align: center;
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/DancingScript-Medium.woff2") format("woff2"), url("../fonts/DancingScript-Medium.woff") format("woff");
+}

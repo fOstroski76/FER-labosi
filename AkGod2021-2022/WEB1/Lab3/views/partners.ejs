@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<%- include(`partials/head`); %>
+
+<body class="content">
+
+<%- include(`partials/header`); %>
+
+<main class="main">
+
+    <div class="centered-container">
+        <h1 class="decorated-title font-secondary main-color">Our <span class="main-color-emphasized">Partners</span> 
+        </h1>
+        <div class="separator"></div>
+    </div>
+    <% if (partners.length === 0) { %>
+        <div class="centered-container">
+            <h2 class="decorated-title font-secondary main-color">No partners! All our own items.</h2>
+        </div>
+    <% } else { %>
+        <section class="section secondary-color-bg info_container">
+            <% for (let partner of partners) { %>
+                <h3 class="decorated-title font-secondary main-color-emphasized"><%= partner.name %> 
+                </h3>
+                <div class="item-view-text-property main-color">Owner: 
+                    <span class="item-view-text-value"><%= partner.owner_name %> <%= partner.owner_surname %> </span></div>
+                <div class="item-view-text-property main-color">E-mail: 
+                    <span class="item-view-text-value"><%= partner.email %></span></div>
+                <div class="item-view-text-property main-color">Partner since: 
+                    <span class="item-view-text-value"><%= partner.partnersince %></span></div>
+                <hr>
+            <% } %>
+        </section>
+    <% } %>
+
+    
+
+
+</main>
+
+<%- include(`partials/footer`); %>
+
+</body>
+
+</html>
+

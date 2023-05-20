@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+
+<%- include(`partials/head`); %>
+
+<body class="content">
+
+<%- include(`partials/header`); %>
+
+<main class="main">
+
+    <!-- INSERT CODE HERE -->
+
+    <!-- POMOĆNI KOD
+        <div class="photo-box" data-id="1">
+            <img class="photo-box-image" src="https://i.imgur.com/Ttir6mp.jpg"></img>
+            <div class="photo-box-title font-secondary main-color-emphasized">
+                <a class="link" href="../item/1">Tulip</a>
+            </div>
+        </div>
+                    
+        <div class="photo-box" data-id="1">
+            <img class="photo-box-image" src="https://i.imgur.com/gH33WyT.jpg"></img>
+            <div class="photo-box-title font-secondary main-color-emphasized">
+                <a class="link" href="../item/2">Lavender</a>
+            </div>
+        </div> 
+    -->
+    
+    
+    <% let i = 0 %>  
+    <% for (const category of categories) { %>
+        
+        <section class="section
+            <% if(i%2 == 1) {%>
+                primary-color-bg
+            <% } else { %>
+                secondary-color-bg
+            <% } %>
+            ">
+            <div class="centered-container">
+                <h1 class="font-secondary main-color">
+                    <span class="main-color-emphasized"><%= category.name %></span>
+                    Inventory</h1>
+                <div class="separator"></div>
+            </div>
+            <% if (category.items.length !== 0) { %>
+                <div class="gallery">
+                    <% for (const item of category.items) { %>
+                        <div class="photo-box">
+                            <img class="photo-box-image" src="<%= item.imageurl %>">
+                            <div class="photo-box-title font-secondary main-color-emphasized"><a class = "link" href = "/item/<%= item.id %>"><%= item.name %></a></div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <div class="centered-container">
+                    <span class="photo-box-title font-secondary main-color">
+                        No items in this category
+                    </span>
+                </div>
+            <% } %>
+        </section>
+        <% i++; %>
+    <% } %>
+</main>
+
+<%- include(`partials/footer`); %>
+
+</body>
+
+</html>

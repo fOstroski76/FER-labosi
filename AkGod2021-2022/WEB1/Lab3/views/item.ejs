@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<%- include(`partials/head`); %>
+
+<body class="content">
+
+<%- include(`partials/header`); %>
+
+<main class="main">
+
+
+    <!-- INSERT CODE HERE -->
+    <!-- 
+        <div class="item-view">
+            <img class="item-view-image" src="https://i.imgur.com/Ttir6mp.jpg"></img>
+            <div class="item-view-text">
+                <div class="item-view-text-title font-secondary main-color-emphasized">Tulip</div>
+                <hr>
+                <div class="item-view-text-property main-color">Price: <span class="item-view-text-value">10 kn</span></div>
+                <div class="item-view-text-property main-color">Available colors: <span class="item-view-text-value">white, red, yellow</span></div>
+                <div class="item-view-text-property main-color">Category: <span class="item-view-text-value">Flowers</span></div>
+                <div class="item-view-text-property main-color">Seasonal: <span class="item-view-text-value">Yes</span></div>
+                <div class="item-view-text-desc font-secondary main-color">Flowers make us smile</div>
+            </div>
+        </div>
+     -->
+        <div class="centered-container">
+            <h1 class="font-secondary main-color">Item
+                <span class="main-color-emphasized">information</span>
+                 </h1>
+            <div class="separator"></div>
+        </div>
+
+        <div class="item-view-special">
+            <img class="item-view-image" src="<%= item.imageurl %>"></img>
+            <div class="item-view-text">
+                <div class="item-view-text-title font-secondary main-color-emphasized"><%= item.name %></div>
+                <hr>
+                <div class="item-view-text-property main-color">Price: <span class="item-view-text-value"><%= item.price %> kn </span></div>
+                <div class="item-view-text-property main-color">Available colors: <span class="item-view-text-value"><%= item.colors %></span></div>
+                <div class="item-view-text-property main-color">Category: <span class="item-view-text-value"><%= category.name %></span></div>
+                <div class="item-view-text-property main-color">Seasonal: <span class="item-view-text-value"><%= category.seasonal %></span></div>
+                <div class="item-view-text-desc font-secondary main-color"><%= category.description %></div>
+            </div>
+        </div>
+        <div class="centered-container">
+            <h1 class="font-secondary main-color">Item
+                <span class="main-color-emphasized">Partners</span>
+                 </h1>
+            <div class="separator"></div>
+        </div>
+        <% if(partners.length == 0) { %> 
+            <div class="centered-container">
+                <h2 class="main-color font-secondary decorated-title">
+                    No partners for this item! All our own.
+                </h2>
+            </div>
+            <% } else { %> 
+                <section class="section secondary-color-bg info_container">
+                    <% for (partner of partners) { %>
+                    <h3 class="decorated-title font-secondary main-color-emphasized">
+                        <%= partner.name + ' ' + partner.surname %>
+                       <a href = "/update-partner/<%= partner.partnerfor %>"> <img src ="/images/pencil.png" class = "icon_crud"> </a>
+                    </h3>
+                    <div class="item-view-text-property main-color">Owner:
+                        <span class="item-view-text-value"><%= partner.owner_name + ' ' + partner.owner_surname  %></span></div>
+                    <div class="item-view-text-property main-color">E-mail:
+                        <span class="item-view-text-value"><%=partner.email%></span></div>
+                    <div class="item-view-text-property main-color">Partner since:
+                        <span class="item-view-text-value"><%=partner.partnersince%></span></div>
+                    <hr>
+                    <% } %>
+                </section>
+                <% } %>
+</main>
+
+<%- include(`partials/footer`); %>
+
+</body>
+
+</html>

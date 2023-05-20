@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<%- include(`partials/head`); %>
+
+<body class="content">
+
+<%- include(`partials/header`); %>
+
+<main class="main">
+
+	<!-- INSERT CODE HERE -->
+	
+	<!-- POMOĆNI DIO 
+
+    <div class="centered-container">
+        <h1 class="decorated-title font-secondary main-color">Update Partner
+            <span class="main-color-emphasized"> --- </span> </h1>
+        <div class="separator"></div>
+    </div>
+    <section class="section secondary-color-bg">
+        <div class="container">
+			<form action=" --- " method=" --- ">
+                <fieldset class="fieldset">
+                    <div class="label-input">
+                        <label for="---"> --- </label>
+                        <input type="---" name="---" id="---" size=" --- ">
+                    </div>
+					<div class="label-input">
+                        <label for="---">Partner for:</label>
+                        (...)
+                        <%- include(`partials/_select`); %>
+                    </div>
+                    <hr>
+                    <div class="submitButtons">
+                        <input type="---" class="btn" >
+                        <input type="---" class="btn" >
+                    </div>
+                </fieldset>
+            </form>
+		</div>
+    </section>
+		
+	-->
+
+    <div class="centered-container">
+        <h1 class="decorated-title font-secondary main-color">Update Partner
+            <span class="main-color-emphasized"> --- </span> </h1>
+        <div class="separator"></div>
+    </div>
+    <section class="section secondary-color-bg">
+        <div class="container">
+			<form action=" --- " method=" GET ">
+                <fieldset class="fieldset">
+                    <div class="label-input">
+                        <label for="name"> Name: </label>
+                        <input type="" name="name" id="nameform" size=" 35  " placeholder="<%= partner.name %>">
+                    </div>
+                    <div class="label-input">
+                        <label for="owner_name"> Owner name: </label>
+                        <input type="" name="owner_name" id="ownernameform" size=" 35 " placeholder="<%= partner.owner_name %>">
+                    </div>
+                    <div class="label-input">
+                        <label for="owner_surname"> Owner surname: </label>
+                        <input type="" name="owner_surname" id="ownersurnameform" size=" 35 " placeholder="<%= partner.owner_surname %>">
+                    </div>
+                    <div class="label-input">
+                        <label for="email"> E-mail: </label>
+                        <input type="" name="email" id="emailform" size=" 35 " placeholder="<%= partner.email %>">
+                    </div>
+                    <div class="label-input">
+                        <label for="partnersince"> Partner since: </label>
+                        <input type="" name="partnersince" id="partnersinceform" size=" 25 " placeholder="<%= partner.partnersince %>">
+                    </div>
+                    
+					<div class="label-input">
+                        <label for="partnerfor">Partner for:</label>
+                        
+                        <%- include(`partials/_select`); %>
+                    </div>
+                    <hr>
+                    <div class="submitButtons">
+                        <input type="submit" class="btn" >
+                        <input type="reset" class="btn" >
+                    </div>
+                </fieldset>
+            </form>
+		</div>
+    </section>
+
+</main>
+
+<%- include(`partials/footer`); %>
+
+</body>
+
+</html>

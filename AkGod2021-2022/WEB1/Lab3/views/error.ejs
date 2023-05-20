@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<%- include(`partials/head`); %>
+
+<body class="content">
+
+<%- include(`partials/header`); %>
+
+<main class="main">
+    <div class="centered-container">
+        <h1 class="decorated-title font-secondary main-color"><span class="main-color-emphasized">
+                            <%= title %>:</span> Error(s) Occurred</h1>
+        <div class="separator"></div>
+        <div class="container">
+            <% if (errors !== 'none') { %>
+                <% for (let errorValidation of errors) { %>
+                    <div class="main-color">Error <span class="main-color-emphasized">
+                            <%= errorValidation.msg %></span> occured on parameter <span class="main-color-emphasized">
+                            <%= errorValidation.param %></span></div>
+                    <div class="separator"></div>
+                <% } %>
+            <% } else { %>
+                <div class="main-color">Error occured because: <span class="main-color-emphasized">
+                            <%= errDB %></span></div>
+                <div class="separator"></div>
+            <% } %>
+        </div>
+        <div class="buttons">
+            <a href="/item/<%= itemID %>">
+                <button class="btn">Back to Item</button>
+            </a>
+        </div>
+    </div>
+</main>
+
+<%- include(`partials/footer`); %>
+
+</body>
+
+</html>
+
