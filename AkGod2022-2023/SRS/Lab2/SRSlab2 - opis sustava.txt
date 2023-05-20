@@ -1,0 +1,39 @@
+
+=========== Opis sustava ===========
+
+Alat usermgmt.py pri prvom pokretanju kreira "users.txt" ako već ne postoji. "Users.txt" je baza za pohranu korisničkih imena i pripadajućih lozinki.
+Pri unosu novog korisničkog računa usermgmt čita sve podatke pohranjene u users.txt i zatim provjerava nalazi li se već uneseno 
+korisničko ime u sustavu (što je potrebno znati za različite funkcionalnosti). To se vrši tako da se na uneseno korisničko ime i 
+odabranu valjanu lozinku dodaje salt (niz od 16 nasumičnih bajtova generiran sa get_random_bytes iz Crypto.Random biblioteke) 
+te se takvi unose kao parametar u funkciji za derivaciju ključa. Produkt funkcije se uspoređuje sa svima u bazi i ako se nađe 
+podudaranje, znači da korisničko ime već postoji.
+
+Što se tiče samog spremanja lozinki i korisničkih imena, odvija se na isti način. Dodaje se salt i "saltirani" input se unosi u
+funkciju za derivaciju ključa, te su u datoteku u svaki redak sprema rezultat. Jedan redak označava jedan par username - password.
+Retci u datoteci su u sljedećem formatu:
+
+    <pohranjeni salt>_<derivacija korisničkog imena>_<derivacija lozinke>_<forcepass zastavica> ,
+
+    gdje "_" označava prazninu.
+
+    Pomoću forcepass zastavice login.py alat zna za koja korisnička imena mora provesti forsiranu promjenu lozinke.
+
+Ovakav način pohrane omogućava da dva različita korisnička računa imaju istu lozinku, a pritom neće imati ni identičan salt jer
+je on različit za svaki korisnički račun. U sustavu se također nikako ne može desiti da se dva korisnička računa jednako zovu.
+
+
+Alat login.py pri svakom korištenju također za dani unos dodaje salt i kreira derivaciju tog unosa, te zatim uspoređuje sa svim ostalim
+generiranim derivacijama u datoteci. 
+
+Programi nikad zapravo neće znati koja je izvorna lozinka. Mogu samo izračunati derivaciju unosa i uspoređivati to sa postojećima. Ako bismo
+htjeli doći do izvorne lozinke, morali bi koristiti dodatne kriptirajuće algoritme, npr AES
+
+
+======== Osvrt na korištene algoritme i predavanja =========
+
+Od spomenutih algoritama na predavanjima koristio sam PBKDF2 kao funkciju za generiranje derivacije iz zadane lozinke. HMAC hash 
+module za PBKDF2 bio mi je Sha256. Nije bila dovoljno koristiti samo neku hash funkciju kao što su Sha1 itd. zato što bi onda sustav
+bio podložan dictionary napadu.
+
+Na predavanjima smo također spominjali i simetrične kripto algoritme, kao što je npr AES, ali oni mi nisu trebali u ovoj laboratorijskoj
+vježbi zato što osiguravanje integriteta nije bilo traženo u zadatku.

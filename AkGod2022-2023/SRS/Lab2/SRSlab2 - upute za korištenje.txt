@@ -1,0 +1,98 @@
+====================================================================
+█░█ █▀█ █░█ ▀█▀ █▀▀   ▀█ ▄▀█   █▄▀ █▀█ █▀█ █ █▀ ▀█▀ █▀▀ █▄░█ ░░█ █▀▀
+█▄█ █▀▀ █▄█ ░█░ ██▄   █▄ █▀█   █░█ █▄█ █▀▄ █ ▄█ ░█░ ██▄ █░▀█ █▄█ ██▄
+====================================================================
+
+Programi usermgmt.py i login.py napisani su u programskom jeziku Python. Kako bi se programi mogli pokrenuti, na PC-u mora biti instaliran python interpreter. Program se može pokretati na Ubuntu
+Linux 18.04+ operacijskom sustavu te na Operacijskom sustavu Windows 10+ pomoću alata WSL (verzija 2). Za uspješno pokretanje programa potrebno je pozicionirati se u Bash terminalu na 
+direktorij u kojem se nalazi izvorni kod.
+
+Pozicionirati se može pomoću naredbe: 
+
+$ cd <put_do_datoteke>  
+
+Provjera jesmo li u ispravnom direktoriju može se izvršiti pomoću naredbe:
+
+$ ls -a
+
+Ovom naredbom ispisat će se sadržaj trenutnog direktorija, te bi direktorij trebao izgledati otprilike ovako:
+
+|Lab2
+|-usermgmt.py
+|-login.py
+|-users.txt (prije prvog pokretanja programa neće biti)
+|-SRSlab2 - opis sustava.txt
+|-SRSlab2 - upute za korištenje.txt
+
+Program se može pokretati ručno, korištenjem naredbi :
+
+    $ python3 usermgmt.py <naredba> <argument>
+
+    ili
+
+    $ python3 login.py <naredba> <argument>
+    
+
+Za uspješno ručno upravljanje programima, potrebno je biti pozicioniran u korektan direktorij.
+
+
+========== usermgmt.py ============
+
+Ovaj alat ima četiri naredbe: add, passwrd, forcepass, delete
+
+Nareba se pokreće pomoću naredbe: python3 usermgmt.py --<ime_naredbe>
+
+    npr. za dodavanje korisnika "Student" treba napisati:
+
+            $ python3 usermgmt.py --add Student
+
+
+Naredba "add" :
+
+    --add <korisničko_ime>
+
+    Ova naredba omogućuje dodavanje novog korisničkog računa sa željenim imenom. Nakon pokretanja korisnik će morati unijeti željenu
+    lozinku i zatim ju ponoviti.
+
+    U slučaju preslabih ili ne poklapajućih lozinki, alat će dojaviti grešku.
+
+
+Naredba "passwrd" :
+
+    --passwrd <korisničko_ime>
+
+    Ova naredba omogućuje promjenu trenutačne lozinke za odabarani korisnički račun. Nakon uspješnog pokretanja korisnik mora unijeti
+    željenu novu lozinku i ponoviti ju.
+
+    U slučaju preslabih ili ne poklapajućih lozinki ili u slučaju nepostojećeg korisničkog računa, alat će dojaviti grešku.
+
+Naredba "forcepass" :
+
+    --forcepass <korisničko_ime>
+
+    Ova naredba dojavljuje odabranom korisničkom računu pri idućem loginu da mora promijeniti lozinku i forsira ga da ju promijeni.
+    
+    U slučaju da korisnički račun ne postoji, alat će dojaviti grešku.
+
+Naredba "delete" :
+
+    --delete <korisničko_ime>
+
+    Ova naredba briše odabrani korisnički račun.
+
+    U slučaju da korisnički račun ne postoji, alat će dojaviti grešku.
+
+
+======= login.py =======
+
+Ovaj alat ima samo naredbu "login" i služi kao simulacija prijavljivanja na neku aplikaciju svojim korisničkim računom.
+Pokretanje i unošenje narebi identično je kao i za alat usermgmt.py
+
+Nareba "login" :
+
+    --login <korisničko_ime>
+
+    Logira korisnika na njihov korisnički račun. Alternativno omogućuje i promjenu lozinke korisničkog računa ako je to zatraženo
+    od administratora, koja funkcionira identično kao i "passwrd" nareba iz usermgmt.py alata.
+
+    U slučaju da korisnički račun ne postoji, alat će dojaviti grešku.

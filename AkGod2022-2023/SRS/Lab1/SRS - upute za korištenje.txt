@@ -1,0 +1,86 @@
+
+====================================================================
+█░█ █▀█ █░█ ▀█▀ █▀▀   ▀█ ▄▀█   █▄▀ █▀█ █▀█ █ █▀ ▀█▀ █▀▀ █▄░█ ░░█ █▀▀
+█▄█ █▀▀ █▄█ ░█░ ██▄   █▄ █▀█   █░█ █▄█ █▀▄ █ ▄█ ░█░ ██▄ █░▀█ █▄█ ██▄
+====================================================================
+
+Program PasswordManager.py napisan je u programskom jeziku Python. Kako bi se program mogao pokrenuti, na PC-u mora biti instaliran python interpreter. Program se može pokretati na Ubuntu
+Linux 18.04+ operacijskom sustavu te na Operacijskom sustavu Windows 10+ pomoću alata WSL (verzija 2). Za uspješno pokretanje programa potrebno je pozicionirati se u Bash terminalu na 
+direktorij u kojem se nalazi izvorni kod.
+Pozicionirati se može pomoću naredbe: 
+
+$ cd <put_do_datoteke>  
+
+Provjera jesmo li u ispravnom direktoriju može se izvršiti pomoću naredbe:
+
+$ ls -a
+
+Ovom naredbom ispisat će se sadržaj trenutnog direktorija, te bi direktorij trebao izgledati otprilike ovako:
+
+|lab1
+|-PasswordManager.py
+|-storedPasswordsFile.txt (prije prvog pokretanja programa neće biti)
+|-Test.sh
+|-SRS - opis sustava.txt
+|-SRS - upute za korištenje.txt
+
+
+Program se može pokretati ručno ili putem skripte koja će odraditi nekoliko jednostavnih testnih primjera i pokriva sve slučajeve osim ručne izmjene sadržaja datoteke storedPasswordsFile.txt.
+Za pokretanje pomoću skripte, potrebno je u Bashu napisati naredbu:
+
+$ chmod +x Test.sh
+
+Nakon toga, testiranje se može pokrenuti sa :
+$ ./Test.sh
+
+
+
+Za ručno upravljanje potrebno je kada smo pozicionirani u ispravni direktorij koristiti jednu od navedenih naredbi:
+
+start, init, put, get, help
+
+Naredba "start" :
+
+	potrebno je u Bash upisati :
+	$ python3 PasswordManager.py start
+
+ova naredba "pokreće program" (naredba pozdravlja korisnika i ispisuje ostale upute, ništa ne radi sa programom i ubačena je kao QoL mogućnost)
+
+Naredba "init" :
+	
+	potrebno je u Bash upisati :
+	python3 PasswordManager.py init [new_master_password]
+
+ova naredba zapravo pokreće/resetira program jer inicijalizira novu bazu zaporki, pritom kreirajući .txt file u koji će se pohranjivati zaporke i adrese. Ako taj .txt file već postoji, init
+naredba će očistiti datoteku.  Pritom će uneseni master password biti aktivan tako dugo dok se ne inicijalizira drugi pomoću nove init naredbe.
+
+Naredba "put" :
+	
+	potrebno je u Bash upisati :
+	PasswordManager.py put [master_password] [desired_address] [desired_password]
+
+
+ova naredba sprema u .txt file kriptirani par adresa-lozinka koji se unose kao argumenti u naredbi.
+
+Naredba "get" :
+
+	potrebno je u Bash upisati :
+	python3 PasswordManager.py get [master_password] [desired_address]
+
+ova naredba dohvaća lozinku za odabranu adresu. U slučaju da adresa ne postoji, program ne vraća ništa.
+
+Naredba "help" :
+
+	potrebno je u Bash upisati :
+	python3 PasswordManager.py help
+
+ova naredba ispisuje podsjetnik o formatima ostalih naredbi u terminal i služi kao QoL mogućnost aplikacije da se ne mora nužno gledati u ovaj dokument kako pisati pojedinu naredbu.
+
+
+Napomene: 
+
+Za neispravne unose program neće raditi, već će javiti korisniku da unos nije valjan.
+
+Za prekid rada potrebno je zatvoriti terminal. Aplikacija će i dalje imati pohranjenu bazu zaporki i zadnje korišteni master password će i dalje biti aktivan, sve do ponovne init naredbe
+(naredba start neće promijeniti master password jer samo ispisuje tekst korisniku, a ne mijenja išta u samom programu i datotekama).
+	

@@ -1,0 +1,28 @@
+Sustav je implementiran kao password manager koji dozvoljava korisniku pohranu uređenih parova (adresa, zaporka) , pregled zaporki za određenu adresu i izmjenu zaporke za postojeću adresu.
+
+Pri unosu uređenog para (adresa, zaporka) par će se spremiti u obliku "adresa lozinka" (dakle s razmakom) u jedan red .txt datoteke. Svaki red predstavlja drugi uređeni par (adresa, zaporka).
+
+Kada se par pohrani u gore navedenom obliku, taj par se zaštićuje enkripcijom. Najprije se na svaki par dodaje 16 nasumično generiranih bajtova kao prefiks da se izbjegne mogućnost praznog stringa.
+Zatim se taj cijeli niz pretvori u bajtove i takav se može kriptirati. Iduće što će alat učiniti je da pomoću master passworda i tzv. "salta" koristeći funkciju za derivaciju ključa PBKDF2
+kreira specijalni tajni ključ koji će se koristiti za kriptiranje pomoću blok algoritma AES. Salt je nasumično generiran niz od 16 bajtova pomoću metode get_random_bytes is Crypto biblioteke.
+
+Nakon što je tajni ključ uspješno kreiran, naš pohranjeni niz bajtova koji sadrži uređeni par kriptira se algoritmom AES, pritom koristeći tajni ključ i IV (inicijalizacijski vektor), koji
+je također generiran pomoću metode get_random_bytes i duljine je 16 bajtova. IV je jedinstven za svaki par (adresa, zaporka), baš kao i salt. HMAC_HASH_MODULE korišten u AES enkripciji je 
+SHA256, a koristi se GCM način rada AES-a.
+
+Korištenjem ove kombinacije osigurali smo i povjerljivost i integritet podataka. Povjerljivost smo osigurali korištenjem AES blok ciphera koji koristi simetrično kriptiranje. Kako AES zahtjeva
+i ključ i nasumični IV, time je osigurano da čak i dva ista teksta koja želimo kriptirati neće imati jednaki rezultat kriptiranja, jer će se IV-evi razlikovati. AES se u trenutku pisanja
+ove laboratorijske vježbe smatra sigurnim. Dodavanjem GCM-a postižemo integritet zato što GCM pri AES kriptiranju generira jedinstveni "tag" kombinirajući ključ i izvorni tekst koji kodiramo.
+Ako bi se kriptirani podatci mijenjali, pomoću taga bismo znali da se to dogodilo.
+
+Pri pohrani kriptiranog para u datoteku, na taj enkriptirani tekst konkateniraju se i korišteni salt i IV i tag za svaki par. Tako mijenjanjem bilo kojeg od tih podataka sustav će prepoznati
+da nešto nije u redu. Budući da tajni ključ ovisi i o master passwordu i saltu, izmjena samo jedne stvari od te dvije će dati drukčije kriptiranje i prilikom dekriptiranja doći će do pogreške
+. U sustavu se dekriptiraju svi podatci kada god se pokreće radnja na jednom, tako da čak i ako se izmijeni npr. 4. red u .txt datoteci (4. uređeni par), prilikom upisa bilo koje naredbe za bilo
+koji drugi par sustav će uočiti promjenu u datoteci.
+
+Alati ne prihvaćaju "slabe" lozinke, odnosno svaka lozinka da bi bila valjana mora ispunjavati sljedeće uvjete:
+
+1. Min. duljina 8 znakova
+2. Ima min. jedno malo slovo
+3. Ima min. jedno veliko slovo
+4. Ima min. jedan specijalni znak 
